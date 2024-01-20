@@ -2,30 +2,106 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Modal</title>
+    <style>
+      /* Styles for the modal */
+      .modal {
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(211, 211, 211);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        text-align: center;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover {
+        color: black;
+      }
+    </style>
   </head>
   <body>
-    <button id="modal-btn" class="button">Click Here</button>
-
-    <div id="my-modal" class="modal">
+    <button onclick="openAlertModal()">Open Alert Modal</button>
+    <div id="alertModal" class="modal">
       <div class="modal-content">
-        <div class="modal-header">
-          <span class="close">&times;</span>
-          <h2>Modal</h2>
-        </div>
-        <div class="modal-body">
-          <p>Welcome to modal tutorial:</p>
-          <p>
-            A modal is a dialog box/popup window that is displayed on top of the
-            current page.
-          </p>
-        </div>
+        <span class="close" onclick="closeModal('alertModal')">&times;</span>
+        <p>This is an alert modal!</p>
+        <button onclick="closeModal('alertModal')">OK</button>
       </div>
     </div>
+    <button onclick="openConfirmationModal()">Open Confirmation Modal</button>
 
-    <script src="script.js"></script>
+    <div id="confirmationModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('confirmationModal')"
+          >&times;</span
+        >
+        <p>Are you sure you want to proceed?</p>
+        <button onclick="confirmAction()">OK</button>
+        <button onclick="closeModal('confirmationModal')">Cancel</button>
+      </div>
+    </div>
+    <button onclick="openPromptModal()">Open Prompt Modal</button>
+
+    <div id="promptModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('promptModal')">&times;</span>
+        <p>Enter your name:</p>
+        <input type="text" id="inputName" />
+        <button onclick="submitName()">Submit</button>
+        <button onclick="closeModal('promptModal')">Cancel</button>
+      </div>
+    </div>
+    <button onclick="openLightboxModal()">Open Lightbox Modal</button>
+
+    <div id="lightboxModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('lightboxModal')">&times;</span>
+        <img src="your-image.jpg" alt="Image" />
+      </div>
+    </div>
+    <script>
+      function openAlertModal() {
+        document.getElementById("alertModal").style.display = "block";
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+      }
+      function openConfirmationModal() {
+        document.getElementById("confirmationModal").style.display = "block";
+      }
+
+      function confirmAction() {
+        // Add your logic here for confirmed action
+        closeModal("confirmationModal");
+      }
+      function openPromptModal() {
+        document.getElementById("promptModal").style.display = "block";
+      }
+
+      function submitName() {
+        var name = document.getElementById("inputName").value;
+        closeModal("promptModal");
+      }
+      function openLightboxModal() {
+        document.getElementById("lightboxModal").style.display = "block";
+      }
+    </script>
   </body>
 </html>
